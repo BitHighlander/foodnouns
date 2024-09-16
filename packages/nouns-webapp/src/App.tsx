@@ -25,6 +25,7 @@ import { CHAIN_ID } from './config';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { AvatarProvider } from '@davatar/react';
 import dayjs from 'dayjs';
+import { DarkModeProvider } from './DarkModeContext';
 
 function App() {
   const { account, chainId, library } = useEthers();
@@ -49,8 +50,9 @@ function App() {
         />
       )}
       <BrowserRouter>
+        <DarkModeProvider>
         <AvatarProvider
-          provider={chainId === ChainId.Mainnet ? library : undefined}
+          provider={chainId === ChainId.Mainnet ? library as any : undefined}
           batchLookups={true}
         >
           <NavBar />
@@ -74,6 +76,7 @@ function App() {
           </Switch>
           <Footer />
         </AvatarProvider>
+        </DarkModeProvider>
       </BrowserRouter>
     </div>
   );
